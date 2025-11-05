@@ -4,6 +4,7 @@ use axum::Router;
 use common::error::Error;
 use log::error;
 use migration::{Migrator, MigratorTrait};
+use mimalloc::MiMalloc;
 use sea_orm::{ConnectOptions, Database, DatabaseConnection};
 use tap::Pipe;
 use tower_http::trace::TraceLayer;
@@ -11,6 +12,9 @@ use utoipa_axum::router::OpenApiRouter;
 use utoipa_scalar::{Scalar, Servable};
 
 use crate::{config::DatabaseConfig, state::AppState};
+
+#[global_allocator]
+static GLOBAL: MiMalloc = MiMalloc;
 
 mod config;
 mod endpoints;
