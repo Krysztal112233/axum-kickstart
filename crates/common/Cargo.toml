@@ -1,0 +1,12 @@
+[package]
+name = "common"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+axum.workspace = true
+config.workspace = true
+sea-orm.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+utoipa.workspace = true

@@ -1,0 +1,22 @@
+[package]
+name = "backend"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+axum.workspace = true
+config.workspace = true
+log.workspace = true
+sea-orm.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tap.workspace = true
+tokio.workspace = true
+tracing-subscriber.workspace = true
+tracing.workspace = true
+utoipa-axum.workspace = true
+utoipa-scalar.workspace = true
+utoipa.workspace = true
+
+common.workspace = true
+migration.workspace = true

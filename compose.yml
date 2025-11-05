@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: docker.io/libraty/postgres:18
+    restart: unless-stopped
+    command: -c 'max_connections=2048'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    ports:
+      - 5432:5432
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./config.toml:/app/config.toml:ro
+    ports:
+      - 8000:8000
+    depends_on:
+      postgres:
+        condition: service_started
+
+volumes:
+  postgres-data:

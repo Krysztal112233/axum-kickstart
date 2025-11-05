@@ -1,0 +1,46 @@
+[workspace]
+members = ["./crates/backend", "./crates/migration/", "crates/common"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[workspace.dependencies]
+async-trait = "0.1"
+axum = "0.8"
+axum-extra = { version = "0.10", features = ["typed-header"] }
+config = { version = "0.15", features = ["toml"] }
+itertools = "0.14"
+log = "0.4"
+mimalloc = { version = "0.1", features = ["v3"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tap = "1.0"
+thiserror = "2.0"
+tokio = { version = "1", features = ["full"] }
+tower = "*"
+tower-http = { version = "0.6", features = ["trace"] }
+tracing = "0.1"
+tracing-subscriber = "0.3"
+url = { version = "2.5", features = ["serde"] }
+utoipa = { version = "*", features = ["chrono", "url", "uuid", "axum_extras"] }
+utoipa-axum = "0.2"
+utoipa-scalar = { version = "*", features = ["axum"] }
+uuid = { version = "1.18", features = ["v7"] }
+
+common = { path = "./crates/common/" }
+migration = { path = "./crates/migration/" }
+
+[workspace.dependencies.sea-orm]
+version = "1.1"
+features = ["runtime-tokio", "sqlx-postgres"]
+
+[workspace.dependencies.sea-orm-migration]
+version = "1.1"
+features = ["runtime-tokio", "sqlx-postgres"]
+
+[workspace.dependencies.axum-valid]
+default-features = false
+features = ["basic", "garde"]
+version = "0.24"
