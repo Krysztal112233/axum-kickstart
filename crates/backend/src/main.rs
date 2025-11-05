@@ -6,6 +6,7 @@ use log::error;
 use migration::{Migrator, MigratorTrait};
 use sea_orm::{ConnectOptions, Database, DatabaseConnection};
 use tap::Pipe;
+use tower_http::trace::TraceLayer;
 use utoipa_axum::router::OpenApiRouter;
 use utoipa_scalar::{Scalar, Servable};
 
@@ -38,6 +39,7 @@ async fn main() -> Result<(), Error> {
 
     let router: Router = router
         .merge(Scalar::with_url("/docs", openapi))
+        .layer(TraceLayer::new_for_http())
         .with_state(states);
 
     let listener = tokio::net::TcpListener::bind(config.addr)
